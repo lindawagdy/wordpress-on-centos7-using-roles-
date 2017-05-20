@@ -1,0 +1,14 @@
+ name: php modules installation
+  yum: pkg={{ item }}
+  with_items:
+    - php
+    - php-fpm
+    - php-mysql
+
+- name: check php-fpm
+  shell: 'touch /var/www/html/index.php'
+
+- name: check php info
+  lineinfile:
+    path: /var/www/html/index.php
+    line: '<?php phpinfo(); ?>'
