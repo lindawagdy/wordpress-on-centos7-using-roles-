@@ -1,0 +1,11 @@
+- name: apache installation
+  yum: name=httpd state=present
+
+- name: starting service
+  service: name=httpd state=started enabled=yes
+
+- name: changing document root
+  replace:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: 'var/www/html'
+    replace: 'var/www/html/wordpress'
