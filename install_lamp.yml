@@ -1,0 +1,9 @@
+- name: installation of LAMP
+  hosts: all
+  remote_user: root
+  
+  roles:
+    - mysql
+    - apache
+    - php-fpm
+    - wordpress
