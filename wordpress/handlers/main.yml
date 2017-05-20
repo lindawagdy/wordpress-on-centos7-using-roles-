@@ -1,0 +1,6 @@
+- name: restarting httpd service
+  service: name=httpd state=restarted enabled=yes
+
+- name: restarting php-fpm service
+  service: name=php-fpm state=restarted enabled=yes
+
