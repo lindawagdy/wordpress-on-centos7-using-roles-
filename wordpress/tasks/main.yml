@@ -1,0 +1,38 @@
+- name: unarchive wordpress
+  unarchive:
+    src: http://wordpress.org/latest.tar.gz
+    dest: /var/www/html
+    remote_src: True
+
+- name: wordpress configuration file
+  copy:
+    remote_src: True
+    src: /var/www/html/wordpress/wp-config-sample.php
+    dest: /var/www/html/wordpress/index.php
+
+- name: change ownership
+  file:
+    path: /var/www/html/
+    owner: apache
+    group: apache
+    mode: "u+x,g+x,o+x"
+    recurse: yes
+
+
+- name: wordpress db name configuration
+  replace:
+    path: /var/www/html/wordpress/index.php
+    regexp: 'database_name_here'
+    replace: "{{ database_name }}"
+
+- name: wordpress db user configuration
+  replace:
+    path: /var/www/html/wordpress/index.php
+    regexp: 'username_here'
+    replace: "{{ database_user}}"
+
+- name: wordpress db password configuration
+  replace:
+    path: /var/www/html/wordpress/index.php
+    regexp: 'password_here'
+    replace: "{{ database_password }}"
